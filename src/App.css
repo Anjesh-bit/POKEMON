@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+.ant-tabs-tab-btn {
+  color: rgb(229, 70, 70) !important;
+  font-weight: 600;
+}
+
+.ant-tabs-ink-bar {
+  background-color: #50d71e !important;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.ant-btn {
+  background-color: #50d71e;
+  color: #fff;
+}
+
+.ant-btn:hover {
+  background-color: #50d71e;
+  color: #fff !important;
+}
+
+/* media queries for less than 1080px */
+@media only screen and (max-width: 1080px) {
+  .paddingSm {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .pokeCreated {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .header {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* media queries for less than 1200px */
+@media only screen and (max-width: 768px) {
+  .pokeSm {
+    grid-template-columns: repeat(2, 1fr);
   }
-  to {
-    transform: rotate(360deg);
+
+  .pokeCreated {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* media queries for less than 640px */
+@media only screen and (max-width: 640px) {
+  .pokeSm {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .pokeCreated {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

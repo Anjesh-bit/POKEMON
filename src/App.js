@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider } from "react-router-dom";
+import "./App.css";
+import { Routes } from "./routes/MainRoutes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import notifications from "./components/common/Notification/Notification";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+
+      retry: (failureCount, error) => {
+        if (
+          error?.response?.status === 401 ||
+          error?.response?.status === 403 ||
+          error?.response?.status === 404
+        ) {
+          return false;
+        }
+
+        return failureCount < 1;
+      },
+
+      onError: (err) =>
+        notifications("Error", `${err?.response?.data?.message}`, "error"),
+    },
+
+    mutations: {
+      onError: (err) =>
+        notifications("Error", `${err?.response?.data?.message}`, "error"),
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={Routes} />
+    </QueryClientProvider>
   );
 }
 
