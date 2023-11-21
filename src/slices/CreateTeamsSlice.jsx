@@ -33,8 +33,14 @@ const teamsSlice = createSlice({
         });
       }
     },
+    removeFromPokeList: (state, action) => {
+      const filteredPokeData = state.pokeData.filter(
+        (items) => items.id !== action.payload.key
+      );
+      state.pokeData = filteredPokeData;
+    },
   },
 });
 
-export const { addTeams } = teamsSlice.actions;
+export const { addTeams, removeFromPokeList } = teamsSlice.actions;
 export default teamsSlice.reducer;
